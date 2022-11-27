@@ -40,7 +40,7 @@ export const Share = () => {
         container: "#kakao-link-btn",
         objectType: "feed",
         content: {
-          title: "F5 Games - 절대음감 테스트",
+          title: "절대음감 테스트 - F5 Games",
           description: "절대음감 테스트",
           imageUrl: "https://f5game.s3.ap-northeast-2.amazonaws.com/pitch.png",
           link: {
