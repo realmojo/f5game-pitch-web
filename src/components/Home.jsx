@@ -1,27 +1,76 @@
-import React from "react";
-import { Button } from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Select } from "antd";
 import { Link } from "react-router-dom";
 import { AdsenseMain } from "./adsense/main";
 
+const { Option } = Select;
+
+const children = [];
+const instArr = [
+  {
+    name: "피아노",
+    key: "piano",
+  },
+  {
+    name: "통기타",
+    key: "guitar",
+  },
+  {
+    name: "클래식기타",
+    key: "classical",
+  },
+  {
+    name: "일렉기타",
+    key: "electric",
+  },
+];
+for (let i = 0; i < 4; i++) {
+  children.push(<Option key={instArr[i].key}>{instArr[i].name}</Option>);
+}
 export const Home = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handleChange = (value) => {
+    localStorage.setItem("pitch-inst", value);
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 1000);
+    localStorage.setItem("pitch-inst", "piano");
+  }, []);
   return (
     <div>
       <div className="play-container">
         <div className="text-center text-3xl mt-3">
           <h1>절대음감 테스트</h1>
         </div>
-        <div className="my-4">
+        <p className="text-center mb-2 mt-4">악기를 선택해 주세요.</p>
+        <div className="text-center mt-2">
+          <Select
+            size="large"
+            defaultValue="피아노"
+            onChange={handleChange}
+            style={{ width: 336 }}
+          >
+            {children}
+          </Select>
+        </div>
+        <div className="my-2">
           <AdsenseMain />
         </div>
         <div className="text-center mt-2">
-          <Button
-            style={{ width: 336 }}
-            className="btn-start"
-            type="primary"
-            size="large"
-          >
-            <Link to="/play">START</Link>
-          </Button>
+          {isLoading ? (
+            <Button
+              style={{ width: 336 }}
+              className="btn-start"
+              type="primary"
+              size="large"
+            >
+              <Link to="/play">START</Link>
+            </Button>
+          ) : (
+            ""
+          )}
         </div>
         <article>
           <div className="post">

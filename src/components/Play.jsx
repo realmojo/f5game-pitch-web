@@ -27,13 +27,14 @@ const getRandomNumber = (min, max) => {
 };
 
 const playSound = (n) => {
+  const inst = localStorage.getItem("pitch-inst") || "piano";
   const d = new Audio(
-    `https://f5game.s3.ap-northeast-2.amazonaws.com/pitch/piano/${n}.mp3`
+    `https://f5game.s3.ap-northeast-2.amazonaws.com/pitch/${inst}/${n}.mp3`
   );
   d.play();
 };
 
-const getPitchInfo = (level) => {
+const getPianoPitchInfo = (level) => {
   const info = [];
   if (1 <= level && level <= 10) {
     return [
@@ -105,8 +106,36 @@ const getPitchInfo = (level) => {
   return info;
 };
 
-const getRandomPitch = (level) => {
-  const pitchInfo = getPitchInfo(level);
+const getGuitarPitchInfo = (level) => {
+  const info = [];
+  console.log(level);
+  if (1 <= level && level <= 20) {
+    for (let i = 0; i < 12; i += 1) {
+      info.push({
+        index: i >= 8 ? i - 8 : i + 4,
+        number: 13 + i,
+      });
+    }
+  } else if (21 <= level && level <= 40) {
+    for (let i = 0; i < 12; i += 1) {
+      info.push({
+        index: i >= 8 ? i - 8 : i + 4,
+        number: 1 + i,
+      });
+    }
+  } else if (41 <= level && level <= 60) {
+    for (let i = 0; i < 12; i += 1) {
+      info.push({
+        index: i >= 8 ? i - 8 : i + 4,
+        number: 25 + i,
+      });
+    }
+  }
+  return info;
+};
+
+const getPianoRandomPitch = (level) => {
+  const pitchInfo = getPianoPitchInfo(level);
   if (1 <= level && level <= 10) {
     const randomIndex = getRandomNumber(0, 6);
     return {
@@ -146,6 +175,16 @@ const getRandomPitch = (level) => {
   }
 };
 
+const getGuitarRandomPitch = (level) => {
+  const pitchInfo = getGuitarPitchInfo(level);
+
+  const randomIndex = getRandomNumber(0, 11);
+  return {
+    index: pitchInfo[randomIndex].index,
+    number: pitchInfo[randomIndex].number,
+  };
+};
+
 export const Play = () => {
   const navigate = useNavigate();
   const [level, setLevel] = useState(1);
@@ -162,7 +201,17 @@ export const Play = () => {
   });
 
   const midiClick = (e) => {
-    const index = e - 24;
+    let index = "";
+    // if (inst === "piano") {
+    index = e - 24;
+    // } else if (
+    //   inst === "guitar" ||
+    //   inst === "classical" ||
+    //   inst === "eletric"
+    // ) {
+    // index = e - 24;
+    // }
+    console.log(index);
     if (currentPitch.index === index) {
       setSuccessCount(successCount + 1);
       localStorage.setItem("pitch-score", successCount + 1);
@@ -188,7 +237,17 @@ export const Play = () => {
   };
 
   const setSound = (level) => {
-    const pitch = getRandomPitch(level);
+    const inst = localStorage.getItem("pitch-inst") || "piano";
+    let pitch = "";
+    if (inst === "piano") {
+      pitch = getPianoRandomPitch(level);
+    } else if (
+      inst === "guitar" ||
+      inst === "classical" ||
+      inst === "eletric"
+    ) {
+      pitch = getGuitarRandomPitch(level);
+    }
     setCurrentPitch(pitch);
     playSound(pitch.number);
   };
