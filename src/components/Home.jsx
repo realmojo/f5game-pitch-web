@@ -55,7 +55,7 @@ export const Home = () => {
             {children}
           </Select>
         </div>
-        <div className="my-2">
+        <div className="my-4">
           <AdsenseMain />
         </div>
         <div className="text-center mt-2">
@@ -66,7 +66,7 @@ export const Home = () => {
               type="primary"
               size="large"
             >
-              <Link to="/play">START</Link>
+              <a href="/play">START</a>
             </Button>
           ) : (
             ""
