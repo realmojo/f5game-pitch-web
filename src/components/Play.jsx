@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
-import { AdsensePlay } from "./adsense/play";
 import "react-piano/dist/styles.css";
 import "./Play.css";
 
@@ -281,9 +280,6 @@ export const Play = () => {
         width={pianoWidth}
         keyboardShortcuts={keyboardShortcuts}
       />
-      <div className="mt-6">
-        <AdsensePlay />
-      </div>
     </div>
   );
 };

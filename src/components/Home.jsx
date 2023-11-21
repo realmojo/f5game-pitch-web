@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Select } from "antd";
-import { Link } from "react-router-dom";
-import { AdsenseMain } from "./adsense/main";
 
 const { Option } = Select;
 
@@ -54,9 +52,6 @@ export const Home = () => {
           >
             {children}
           </Select>
-        </div>
-        <div className="my-4">
-          <AdsenseMain />
         </div>
         <div className="text-center mt-2">
           {isLoading ? (

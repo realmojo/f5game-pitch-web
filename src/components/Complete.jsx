@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Spin } from "antd";
-import { Share } from "./Share";
-import { AdsenseLoading } from "./adsense/loading";
-import { AdsenseResult } from "./adsense/result";
 
 export const Complete = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +58,6 @@ export const Complete = () => {
           ) : (
             ""
           )}
-          <AdsenseLoading />
           {isLoading ? (
             ""
           ) : (
@@ -85,53 +81,8 @@ export const Complete = () => {
               당신의 절대음감은 <strong>{pitchScore}</strong>점 입니다.
             </h1>
 
-            <AdsenseResult />
-
             <div className="text-center pt-4 text-4xl">{name}</div>
             <div className="text-left px-4 pt-4 pb-4">{text}</div>
-          </div>
-          <Share />
-          <div className="text-center">
-            <div className="text-center pb-4 text-3xl">
-              다른 테스트 하러가기
-            </div>
-            <div className="flex flex-col text-center pb-4">
-              <Button
-                className="mt-2 mb-2 btn-other"
-                type="primary"
-                size="large"
-              >
-                <a href="https://f5game.co.kr">F5 Games</a>
-              </Button>
-              <Button
-                className="mt-2 mb-2 btn-other"
-                type="primary"
-                size="large"
-              >
-                <a href="https://mbti.f5game.co.kr">MBTI 검사 테스트</a>
-              </Button>
-              <Button
-                className="mt-2 mb-2 btn-other"
-                type="primary"
-                size="large"
-              >
-                <a href="https://adhd.f5game.co.kr">성인 ADHD 테스트</a>
-              </Button>
-              <Button
-                className="mt-2 mb-2 btn-other"
-                type="primary"
-                size="large"
-              >
-                <a href="https://color.f5game.co.kr">색맹 테스트</a>
-              </Button>
-              <Button
-                className="mt-2 mb-2 btn-other"
-                type="primary"
-                size="large"
-              >
-                <a href="https://color.f5game.co.kr">영적동물 테스트</a>
-              </Button>
-            </div>
           </div>
         </React.Fragment>
       )}
